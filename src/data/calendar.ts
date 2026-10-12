@@ -1,0 +1,121 @@
+import type { Festival } from './types'
+
+// Source : fr.stardewvalleywiki.com (1.6). Conseils volontairement courts. Un élément avec `year` n'a lieu qu'une année donnée.
+export const FESTIVALS: Festival[] = [
+  {
+    id: 'oeufs', name: 'Fête des Œufs', season: 'printemps', days: [13],
+    hours: '9h00 – 14h00', location: 'Place de Pélican Ville',
+    tips: ['Ramasse 9 œufs dans le temps imparti pour gagner.', 'Des graines de fraise sont en vente.'],
+    wiki: 'Fête_des_Œufs',
+  },
+  {
+    id: 'desert', name: 'Festival du désert', season: 'printemps', days: [15, 16, 17],
+    hours: '10h00 – 2h00', location: 'Désert',
+    tips: ['Trois jours : courses avec paris, défis, relooking par Emily.', 'Le temps s’écoule normalement.'],
+    wiki: 'Festival_du_désert',
+  },
+  {
+    id: 'fleurs', name: 'Danse des Fleurs', season: 'printemps', days: [24],
+    hours: '9h00 – 14h00', location: 'Forêt de la Sève-Cendreuse (ouest)',
+    tips: ['Invite un(e) célibataire pour danser (4 cœurs minimum).', 'Danser améliore la relation d’un cœur.'],
+    wiki: 'Danse_des_Fleurs',
+  },
+  {
+    id: 'luau', name: 'Fête Hawaïenne', season: 'ete', days: [11],
+    hours: '9h00 – 14h00', location: 'La plage',
+    tips: ['Ajoute un ingrédient à la soupe : le résultat influence l’amitié avec tous les villageois.', 'Choisis un objet de bonne qualité et évite ceux que le gouverneur déteste.'],
+    wiki: 'Fête_Hawaïenne',
+  },
+  {
+    id: 'truite', name: 'Derby de la truite', season: 'ete', days: [20, 21],
+    hours: '6h10 – 2h00', location: 'Rivière, Forêt de la Sève-Cendreuse',
+    tips: ['Pêche des truites pour gagner des jetons à échanger.', 'Boutiques et maisons restent ouvertes, le temps s’écoule normalement.'],
+    wiki: 'Derby_de_la_truite',
+  },
+  {
+    id: 'meduses', name: 'Danse des Méduses', season: 'ete', days: [28],
+    hours: '22h00 – minuit', location: 'La plage',
+    tips: ['Se déclenche seulement si tu as vu la migration des méduses (lettre de Willy).'],
+    wiki: 'Danse_des_Méduses_Clair_de_Lune',
+  },
+  {
+    id: 'foire', name: 'Grand Festival de Stardew Valley', season: 'automne', days: [16],
+    hours: '9h00 – 15h00', location: 'Pélican Ville',
+    tips: ['Prépare une grille de 9 objets de qualité, variés (fruit, légume, artisanat, minéral…) pour le concours.', 'Récupère des jetons étoilés à échanger contre des récompenses.'],
+    wiki: 'Grand_Festival_de_Stardew_Valley',
+  },
+  {
+    id: 'esprits', name: 'Fête des Esprits', season: 'automne', days: [27],
+    hours: '22h00 – minuit', location: 'Pélican Ville',
+    tips: ['Traverse le labyrinthe : la citrouille dorée se cache au bout.'],
+    wiki: 'Fête_des_Esprits',
+  },
+  {
+    id: 'glaces', name: 'Festival des Glaces', season: 'hiver', days: [8],
+    hours: '9h00 – 14h00', location: 'Forêt de la Sève-Cendreuse',
+    tips: ['Concours de pêche contre trois villageois : prends une canne améliorée et de l’appât.'],
+    wiki: 'Festival_des_Glaces',
+  },
+  {
+    id: 'calamar', name: 'Fête du calamar', season: 'hiver', days: [12, 13],
+    hours: '6h10 – 2h00', location: 'La plage',
+    tips: ['Les récompenses montent par paliers (cuivre, fer, or, iridium) selon les calamars pêchés.'],
+    wiki: 'Fête_du_calamar',
+  },
+  {
+    id: 'marche', name: 'Marché nocturne', season: 'hiver', days: [15, 16, 17],
+    hours: '17h00 – 2h00', location: 'La plage',
+    tips: ['Boutiques, spectacle des sirènes et sous-marin pour pêcher en eaux profondes.'],
+    wiki: 'Marché_nocturne',
+  },
+  {
+    id: 'etoile', name: 'Fête de l’Étoile Hivernale', season: 'hiver', days: [25],
+    hours: '9h00 – 14h00', location: 'Pélican Ville',
+    tips: ['Échange de cadeaux secrets : tu es averti par lettre. Prépare un cadeau que ton destinataire aime.'],
+    wiki: 'Fête_de_l’Étoile_Hivernale',
+  },
+  {
+    id: 'grand-pere', name: 'Évaluation de Grand-père', season: 'printemps', days: [1], year: 3, icon: '🕯️',
+    hours: 'Au début de l’An 3', location: 'Ferme (tombe de Grand-père, coin nord-ouest)',
+    tips: [
+      'Grand-père réapparaît le 1er printemps de l’An 3 et évalue ta ferme sur 21 points : plus ton score est haut, plus il y a de bougies allumées sur sa tombe.',
+      'À 12 points ou plus, interagis avec la tombe pour obtenir la Statue de perfection (2 à 8 minerais d’iridium par jour).',
+      'Pour refaire l’évaluation : pose un Diamant sur la tombe, Grand-père revient le lendemain.',
+    ],
+    tables: [
+      {
+        title: 'Points à gagner',
+        columns: ['Catégorie', 'Objectif', 'Points'],
+        groupFirst: true,
+        rows: [
+          ['Or gagné au total', '50 000 po', '1'],
+          ['Or gagné au total', '100 000 po', '1'],
+          ['Or gagné au total', '200 000 po', '1'],
+          ['Or gagné au total', '300 000 po', '1'],
+          ['Or gagné au total', '500 000 po', '1'],
+          ['Or gagné au total', '1 000 000 po', '2'],
+          ['Compétences', '30 niveaux cumulés', '1'],
+          ['Compétences', '50 niveaux cumulés (tout au niveau 10)', '1'],
+          ['Succès', 'Une collection complète (musée)', '1'],
+          ['Succès', 'Maître pêcheur (tous les poissons)', '1'],
+          ['Succès', 'Cargaison pleine (tout expédier)', '1'],
+          ['Amitié', 'Marié(e) avec 2 améliorations de maison', '1'],
+          ['Amitié', '8 cœurs avec 5 villageois', '1'],
+          ['Amitié', '8 cœurs avec 10 villageois', '1'],
+          ['Amitié', 'Animal de compagnie à environ 5 cœurs', '1'],
+          ['Autres', 'Centre communautaire complété', '1'],
+          ['Autres', 'Cérémonie de restauration du centre communautaire', '2'],
+          ['Autres', 'Clé en tête-de-mort obtenue', '1'],
+          ['Autres', 'Clé rouillée obtenue', '1'],
+        ],
+        total: ['Total', '', '21'],
+      },
+      {
+        title: 'Bougies allumées',
+        columns: ['Points obtenus', 'Bougies'],
+        rows: [['0 à 3', '1'], ['4 à 7', '2'], ['8 à 11', '3'], ['12 et plus', '4 + Statue de perfection']],
+      },
+    ],
+    wiki: 'Grand-père',
+  },
+]

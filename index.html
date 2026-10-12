@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Compagnon de jeu pour Stardew Valley 1.6 : calendrier, anniversaires, cultures, pêche, recettes, objets, villageois et paquets du Centre communautaire." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#7a4a21" />
+    <title>Stardew Helper</title>
+    <script>
+      // Applique le thème choisi avant le premier affichage (évite un flash clair en mode sombre).
+      try {
+        var t = localStorage.getItem('stardew-helper:theme')
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t)
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

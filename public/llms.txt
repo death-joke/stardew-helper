@@ -1,0 +1,15 @@
+# Stardew Helper
+
+> Compagnon de jeu pour Stardew Valley 1.6, en français : calendrier et anniversaires, cultures, pêche, recettes, objets, villageois, armes et paquets du Centre communautaire. Données extraites du wiki francophone de Stardew Valley.
+
+## Pages
+
+- [Aujourd'hui](/) : festivals, anniversaires, rappels et poissons de saison selon la date du jeu
+- [Calendrier](/calendrier) : festivals et anniversaires de chaque saison
+- [Agriculture](/agriculture) : cultures, profit par jour et dates de récolte
+- [Pêche](/peche) : poissons par saison, météo, heure et lieu, et production des étangs
+- [Craft](/craft) : recettes d'artisanat et de cuisine
+- [Objets](/objets) : où trouver minéraux, artefacts, ressources et autres objets
+- [Armes & armures](/equipement) : armes, chaussures et anneaux
+- [Villageois](/villageois) : cadeaux, emplois du temps et anniversaires
+- [Paquets](/paquets) : paquets du Centre communautaire

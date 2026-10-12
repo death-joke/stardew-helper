@@ -1,0 +1,140 @@
+name: Release
+
+# À chaque fusion sur main : vérifications -> bump de version + CHANGELOG + étiquette vX.Y.Z
+# (commit-and-tag-version) -> construction et publication de l'image sur GHCR.
+# Le déploiement n'est PAS fait ici : l'image publiée est reprise à la main dans le homelab.
+on:
+  push:
+    branches:
+      - main
+  # Lancement manuel : permet de forcer la version (utile pour la toute première, ex. 1.0.0).
+  workflow_dispatch:
+    inputs:
+      release-as:
+        description: 'Forcer la version : numéro exact (1.0.0) ou patch / minor / major. Vide = calcul automatique depuis les commits.'
+        required: false
+        default: ''
+
+# Plafond de droits pour les jobs appelés (un workflow réutilisable ne peut pas demander
+# plus que ce que son appelant déclare — voir pr.yml d'Ares pour l'incident correspondant).
+permissions:
+  contents: write
+  packages: write
+
+# Une seule release à la fois : deux fusions rapprochées ne doivent pas se marcher dessus.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  # Pas de nouvelle exécution pour le commit de release lui-même (chore(release): …).
+  ci:
+    name: CI
+    if: ${{ !startsWith(github.event.head_commit.message, 'chore(release):') }}
+    uses: ./.github/workflows/ci.yml
+
+  release:
+    name: Bump version & tag
+    needs: ci
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      version: ${{ steps.bump.outputs.version }}
+      tag: ${{ steps.bump.outputs.tag }}
+      sha: ${{ steps.bump.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          # RELEASE_PAT (optionnel) est nécessaire si main est protégée : le jeton par défaut
+          # ne peut alors pas pousser le commit de release.
+          token: ${{ secrets.RELEASE_PAT || github.token }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Bump version, update CHANGELOG, tag and push
+        id: bump
+        env:
+          RELEASE_AS: ${{ inputs.release-as }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$RELEASE_AS" ]; then
+            npm run release -- --release-as "$RELEASE_AS"
+          else
+            npm run release
+          fi
+          git push --follow-tags origin HEAD:main
+          version=$(node -p "require('./package.json').version")
+          {
+            echo "version=${version}"
+            echo "tag=v${version}"
+            echo "sha=$(git rev-parse --short HEAD)"
+          } >> "$GITHUB_OUTPUT"
+
+  image:
+    name: Build & push image
+    needs: release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      # On construit exactement le commit de release étiqueté (la version est incluse dans l'app).
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.release.outputs.tag }}
+
+      - name: Image name (GHCR exige des minuscules)
+        id: img
+        run: echo "name=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build & push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          platforms: linux/amd64,linux/arm64
+          # Versions exactes uniquement (pas de `latest`) : le homelab épingle chaque image.
+          tags: |
+            ${{ steps.img.outputs.name }}:${{ needs.release.outputs.version }}
+            ${{ steps.img.outputs.name }}:sha-${{ needs.release.outputs.sha }}
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.version=${{ needs.release.outputs.version }}
+            org.opencontainers.image.revision=${{ needs.release.outputs.sha }}
+          cache-from: type=gha,scope=stardew-helper
+          cache-to: type=gha,mode=max,scope=stardew-helper
+          # Une seule empreinte par plateforme, sans attestation : évite que `docker compose pull`
+          # ne sache pas résoudre le sous-manifeste (même précaution que dans le workflow d'Ares).
+          provenance: false
+
+      - name: Summary
+        run: |
+          {
+            echo "### Image publiée"
+            echo
+            echo '```'
+            echo "${{ steps.img.outputs.name }}:${{ needs.release.outputs.version }}"
+            echo '```'
+            echo
+            echo "À reprendre dans le homelab : \`image: ${{ steps.img.outputs.name }}:${{ needs.release.outputs.version }}\`"
+          } >> "$GITHUB_STEP_SUMMARY"

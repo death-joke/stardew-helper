@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+  --color-parchment: #f6ecd2;
+  --color-parchment-dark: #e8d6a8;
+  --color-wood: #7a4a21;
+  --color-wood-dark: #4f2f14;
+  --color-ink: #3b2a1a;
+  --color-muted: #5c4a36; /* texte secondaire (contraste ≥ 5:1 sur tous les fonds) */
+  --color-card: rgb(255 255 255 / 0.6);
+  --color-field: rgb(255 255 255 / 0.7);
+  /* Saisons : fonds (texte blanc dessus) puis variantes pour du texte coloré sur la page (contraste ≥ 4,5:1). */
+  --color-spring: #3f7d2e;
+  --color-summer: #8a6100;
+  --color-fall: #a24a1c;
+  --color-winter: #2f6a99;
+  --color-spring-text: #34701f;
+  --color-summer-text: #7a5600;
+  --color-fall-text: #a24a1c;
+  --color-winter-text: #2a6190;
+  --font-pixel: "Press Start 2P", ui-monospace, monospace;
+}
+
+/* Thème sombre : suit le téléphone / l'ordinateur, sauf choix explicite (data-theme="light" ou "dark"). */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-parchment: #1c1710;
+  --color-parchment-dark: #2e2519;
+  --color-wood: #c9955a;
+  --color-wood-dark: #f1d9a8;
+  --color-ink: #eadfc6;
+  --color-muted: #b9ad97;
+  --color-card: rgb(255 255 255 / 0.05);
+  --color-field: rgb(255 255 255 / 0.09);
+  --color-spring-text: #8fd477;
+  --color-summer-text: #f0c05a;
+  --color-fall-text: #f0905a;
+  --color-winter-text: #7fb6e6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-parchment: #1c1710;
+    --color-parchment-dark: #2e2519;
+    --color-wood: #c9955a;
+    --color-wood-dark: #f1d9a8;
+    --color-ink: #eadfc6;
+    --color-muted: #b9ad97;
+    --color-card: rgb(255 255 255 / 0.05);
+    --color-field: rgb(255 255 255 / 0.09);
+    --color-spring-text: #8fd477;
+    --color-summer-text: #f0c05a;
+    --color-fall-text: #f0905a;
+    --color-winter-text: #7fb6e6;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--color-parchment);
+  color: var(--color-ink);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}

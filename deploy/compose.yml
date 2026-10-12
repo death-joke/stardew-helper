@@ -1,0 +1,9 @@
+# Exemple d'extrait pour le homelab (dossier `game/`), à adapter à ses conventions : réseau externe,
+# container_name explicite, image épinglée sur une version exacte (jamais `latest`).
+# L'image est publiée par .github/workflows/release.yml ; la version à mettre est dans le résumé du job « Build & push image ».
+services:
+  stardew-helper:
+    image: ghcr.io/death-joke/stardew-helper:1.0.0
+    container_name: stardew-helper
+    restart: unless-stopped
+    # Pas de port publié : le reverse proxy du homelab joint le conteneur par son nom (http://stardew-helper:80).
