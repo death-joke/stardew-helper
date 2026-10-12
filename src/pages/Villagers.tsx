@@ -14,7 +14,7 @@ import type { VillagerSort } from '../lib/villagers'
 import { useGameDate } from '../state/useGameDate'
 import { useSchedules } from '../state/useSchedules'
 
-const field = 'rounded border border-wood/40 bg-field px-2 py-1.5 text-sm'
+const field = 'field'
 
 export function Villagers() {
   const { date } = useGameDate()
@@ -51,7 +51,7 @@ export function Villagers() {
             <option value="nom">Nom</option>
           </select>
           <label className="flex items-center gap-2 text-sm">
-            <input type="checkbox" checked={marriageable} onChange={(e) => setMarriageable(e.target.checked)} />
+            <input type="checkbox" className="check" checked={marriageable} onChange={(e) => setMarriageable(e.target.checked)} />
             Mariables
           </label>
         </div>

@@ -22,7 +22,7 @@ const SORTS: Array<[SortKey, string]> = [
   ['vente', 'Prix de vente'],
 ]
 
-const field = 'rounded border border-wood/40 bg-field px-2 py-1.5 text-sm'
+const field = 'field'
 
 export function Farming() {
   const { date } = useGameDate()
@@ -87,9 +87,9 @@ export function Farming() {
           </select>
         </div>
         <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-          <label className="flex items-center gap-2"><input type="checkbox" checked={agriculturist} onChange={(e) => setAgriculturist(e.target.checked)} />Agriculteur (−10 % de temps)</label>
-          <label className="flex items-center gap-2"><input type="checkbox" checked={tiller} onChange={(e) => setTiller(e.target.checked)} />Cultivateur (+10 % de prix)</label>
-          <label className="flex items-center gap-2"><input type="checkbox" checked={artisan} onChange={(e) => setArtisan(e.target.checked)} />Artisan (+40 % produits transformés)</label>
+          <label className="flex items-center gap-2"><input type="checkbox" className="check" checked={agriculturist} onChange={(e) => setAgriculturist(e.target.checked)} />Agriculteur (−10 % de temps)</label>
+          <label className="flex items-center gap-2"><input type="checkbox" className="check" checked={tiller} onChange={(e) => setTiller(e.target.checked)} />Cultivateur (+10 % de prix)</label>
+          <label className="flex items-center gap-2"><input type="checkbox" className="check" checked={artisan} onChange={(e) => setArtisan(e.target.checked)} />Artisan (+40 % produits transformés)</label>
         </div>
         <p className="mt-3 text-sm text-muted">
           Plantation le {formatDate(plant)}. Avec un bonus de vitesse, le calcul peut varier d’un jour par rapport au jeu.

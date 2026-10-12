@@ -72,7 +72,7 @@ export function SearchBox({ className = '' }: { className?: string }) {
         onFocus={() => setOpen(true)}
         onBlur={() => setOpen(false)}
         onKeyDown={onKeyDown}
-        className="w-full rounded border border-wood/40 bg-field px-3 py-1.5 text-sm"
+        className="field w-full"
       />
       {results.length > 0 && (
         <ul

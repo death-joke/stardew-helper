@@ -9,7 +9,7 @@ import { availableIn, seasonSummary } from '../lib/bundles'
 import { itemLink } from '../lib/links'
 import { useGameDate } from '../state/useGameDate'
 
-const field = 'rounded border border-wood/40 bg-field px-2 py-1.5 text-sm'
+const field = 'field'
 
 export function Bundles() {
   const { date } = useGameDate()
@@ -31,7 +31,7 @@ export function Bundles() {
             {SEASONS.map((s) => <option key={s} value={s}>Disponible en : {SEASON_LABELS[s]}</option>)}
           </select>
           <label className="flex items-center gap-2 text-sm">
-            <input type="checkbox" checked={hideOut} onChange={(e) => setHideOut(e.target.checked)} />
+            <input type="checkbox" className="check" checked={hideOut} onChange={(e) => setHideOut(e.target.checked)} />
             Masquer les objets hors saison
           </label>
         </div>

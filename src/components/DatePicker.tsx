@@ -11,7 +11,7 @@ const SEASON_BG: Record<Season, string> = {
 
 export function DatePicker() {
   const { date, setDate, shift } = useGameDate()
-  const field = 'rounded border border-wood/40 bg-field px-2 py-1.5 text-sm'
+  const field = 'field'
 
   return (
     <div className="flex flex-wrap items-center gap-2">
@@ -54,7 +54,7 @@ export function DatePicker() {
           aria-label="Année"
           value={date.year}
           onChange={(e) => setDate({ ...date, year: Math.max(1, Math.floor(Number(e.target.value)) || 1) })}
-          className={`${field} w-16`}
+          className={`${field} w-20`}
         />
       </label>
 

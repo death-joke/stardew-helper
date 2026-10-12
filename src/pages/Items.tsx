@@ -4,7 +4,7 @@ import { Card } from '../components/Card'
 import { catalog, categories, filterItems, lovedBy, recipesUsing } from '../lib/items'
 import type { CatalogItem } from '../lib/items'
 
-const field = 'rounded border border-wood/40 bg-field px-2 py-1.5 text-sm'
+const field = 'field'
 const ALL = catalog()
 const CATEGORIES = categories(ALL)
 

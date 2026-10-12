@@ -12,7 +12,7 @@ import type { FishFilter, PriceOptions } from '../lib/fishing'
 import { pondSpecies } from '../lib/ponds'
 import { useGameDate } from '../state/useGameDate'
 
-const field = 'rounded border border-wood/40 bg-field px-2 py-1.5 text-sm'
+const field = 'field'
 const HOURS = Array.from({ length: 20 }, (_, i) => i + 6) // 6h … 1h (25)
 
 export function Fishing() {
@@ -85,9 +85,9 @@ export function Fishing() {
           />
         </div>
         <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-          <label className="flex items-center gap-2"><input type="checkbox" checked={fisher} onChange={(e) => setFisher(e.target.checked)} />Pêcheur (+25 %)</label>
-          <label className="flex items-center gap-2"><input type="checkbox" checked={angler} onChange={(e) => setAngler(e.target.checked)} />Pêcheur maître (+50 %)</label>
-          <label className="flex items-center gap-2"><input type="checkbox" checked={mariner} onChange={(e) => setMariner(e.target.checked)} />Marin</label>
+          <label className="flex items-center gap-2"><input type="checkbox" className="check" checked={fisher} onChange={(e) => setFisher(e.target.checked)} />Pêcheur (+25 %)</label>
+          <label className="flex items-center gap-2"><input type="checkbox" className="check" checked={angler} onChange={(e) => setAngler(e.target.checked)} />Pêcheur maître (+50 %)</label>
+          <label className="flex items-center gap-2"><input type="checkbox" className="check" checked={mariner} onChange={(e) => setMariner(e.target.checked)} />Marin</label>
         </div>
         <p className="mt-3 text-sm text-muted">
           {rows.length} poisson{rows.length > 1 ? 's' : ''}. Par défaut : saison et météo « soleil » ; passe en « pluie » pour voir ceux qui ne sortent que sous la pluie.
