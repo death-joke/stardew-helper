@@ -72,7 +72,9 @@ jobs:
           else
             npm run release
           fi
-          git push --follow-tags origin HEAD:main
+          # --atomic : le commit de release et l'étiquette partent ensemble ou pas du tout
+          # (sinon un push de branche refusé laisserait une étiquette orpheline sur GitHub).
+          git push --atomic --follow-tags origin HEAD:main
           version=$(node -p "require('./package.json').version")
           {
             echo "version=${version}"
