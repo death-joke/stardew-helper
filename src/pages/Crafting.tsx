@@ -9,7 +9,7 @@ import { Card } from '../components/Card'
 
 type Tab = 'artisanat' | 'cuisine'
 
-const field = 'rounded border border-wood/40 bg-field px-2 py-1.5 text-sm'
+const field = 'field'
 const CATEGORIES = [...new Set(CRAFT_RECIPES.map((r) => r.category))]
 const INGREDIENTS = ingredientNames([...CRAFT_RECIPES, ...COOKING_RECIPES])
 const BUFF_STATS = buffStats(COOKING_RECIPES)

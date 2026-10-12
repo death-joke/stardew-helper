@@ -12,7 +12,7 @@ import { normalize } from '../lib/text'
 
 type Tab = 'armes' | 'chaussures' | 'anneaux'
 
-const field = 'rounded border border-wood/40 bg-field px-2 py-1.5 text-sm'
+const field = 'field'
 const WEAPONS = EQUIPMENT.filter(isWeapon)
 const FOOTWEAR = EQUIPMENT.filter((e) => !isWeapon(e))
 const RINGS = ITEMS.filter((i) => i.category === 'Anneaux')

@@ -33,7 +33,7 @@ export function Calendar() {
             aria-label="Année affichée"
             value={year}
             onChange={(e) => setYear(Math.max(1, Math.floor(Number(e.target.value)) || 1))}
-            className="w-16 rounded border border-wood/40 bg-field px-2 py-1 text-sm"
+            className="field w-20"
           />
         </label>
         <div role="tablist" className="mb-3 flex gap-1">

@@ -16,7 +16,7 @@ export function ThemeToggle({ className = '' }: { className?: string }) {
       onClick={cycle}
       aria-label={`${text} (cliquer pour changer)`}
       title={text}
-      className={`flex items-center gap-2 rounded border border-wood/40 bg-field px-2 py-1.5 text-sm ${className}`}
+      className={`field flex items-center gap-2 ${className}`}
     >
       <span aria-hidden>{icon}</span>
       <span>{text.replace('Thème ', '')}</span>
