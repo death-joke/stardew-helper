@@ -267,3 +267,26 @@ export interface Place {
   notes?: string
   links?: PlaceLink[]
 }
+
+export type ToolGroup = 'amelioration' | 'peche' | 'autre'
+
+export interface ToolLevel {
+  name: string
+  /** Prix en po ; null pour un outil de départ ou non vendu. */
+  price: number | null
+  priceNote?: string
+  /** Barres de métal demandées par le forgeron pour passer à ce niveau. */
+  ingredients: Ingredient[]
+  /** Jours de travaux chez Clint pour atteindre ce niveau. */
+  days?: number
+  effect: string
+  where?: string
+  requires?: string
+}
+
+export interface ToolLine {
+  id: string
+  name: string
+  group: ToolGroup
+  levels: ToolLevel[]
+}
