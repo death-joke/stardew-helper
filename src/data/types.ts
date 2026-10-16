@@ -213,3 +213,57 @@ export interface Equipment {
   shopPrice: number | null
   desc: string
 }
+
+export type BuildingGroup = 'robin' | 'maison' | 'sorcier' | 'gingembre'
+
+export interface Building {
+  id: string
+  name: string
+  group: BuildingGroup
+  /** Prix : en pièces d'or (`po`) ou en noix dorées (`noix`). */
+  price: number
+  currency: 'po' | 'noix'
+  materials: Ingredient[]
+  /** Jours de construction ; 0 = instantané. `undefined` : non documenté. */
+  days?: number
+  /** Nom du bâtiment à posséder pour acheter celui-ci (amélioration). */
+  upgradeOf?: string
+  desc: string
+  unlock?: string
+}
+
+export type QuestKind = 'histoire' | 'speciale' | 'qi'
+
+export interface Quest {
+  id: string
+  name: string
+  kind: QuestKind
+  text: string
+  /** Commanditaire (commandes spéciales uniquement). */
+  giver?: string
+  /** Comment la quête se déclenche. */
+  unlock: string
+  objective: string
+  reward: string
+  duration?: string
+  repeatable?: boolean
+}
+
+export interface PlaceLink {
+  kind: 'quete' | 'construction'
+  /** Nom exact de la quête ou de la construction visée. */
+  name: string
+}
+
+export type PlaceArea = 'Vallée' | 'Montagne' | 'Désert de Calico' | 'Île Gingembre'
+
+export interface Place {
+  id: string
+  name: string
+  area: PlaceArea
+  /** Emplacement précis (texte libre). */
+  region: string
+  unlock: string
+  notes?: string
+  links?: PlaceLink[]
+}

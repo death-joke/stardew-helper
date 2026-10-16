@@ -3,13 +3,17 @@ import { COOKING_RECIPES, CRAFT_RECIPES } from '../data/recipes'
 import { CRAB_POT, FISH, NIGHT_MARKET_FISH } from '../data/fish'
 import { CROPS } from '../data/crops'
 import { FESTIVALS } from '../data/calendar'
+import { BUILDINGS, GROUP_LABELS } from '../data/buildings'
 import { EQUIPMENT } from '../data/equipment'
 import { ITEMS } from '../data/items'
+import { PLACES } from '../data/places'
+import { QUESTS } from '../data/quests'
 import { VILLAGERS } from '../data/villagers'
 import { SEASON_LABELS } from './gameDate'
+import { KIND_TABS } from './quests'
 import { normalize } from './text'
 
-export type SearchKind = 'objet' | 'equipement' | 'poisson' | 'culture' | 'artisanat' | 'cuisine' | 'villageois' | 'festival'
+export type SearchKind = 'objet' | 'equipement' | 'poisson' | 'culture' | 'artisanat' | 'cuisine' | 'villageois' | 'festival' | 'construction' | 'quete' | 'lieu'
 
 export const KIND_LABELS: Record<SearchKind, string> = {
   objet: 'Objet',
@@ -20,6 +24,9 @@ export const KIND_LABELS: Record<SearchKind, string> = {
   cuisine: 'Recette de cuisine',
   villageois: 'Villageois',
   festival: 'Festival',
+  construction: 'Construction',
+  quete: 'Quête',
+  lieu: 'Lieu',
 }
 
 export interface SearchEntry {
@@ -43,6 +50,9 @@ function build(): SearchEntry[] {
     ...COOKING_RECIPES.map((r) => ({ name: r.name, kind: 'cuisine' as const, detail: `${r.price} po`, to: `/craft?tab=cuisine&q=${enc(r.name)}` })),
     ...VILLAGERS.map((v) => ({ name: v.name, kind: 'villageois' as const, detail: `Anniversaire : ${v.birthday.day} ${SEASON_LABELS[v.birthday.season]}`, to: `/villageois?q=${enc(v.name)}` })),
     ...FESTIVALS.map((f) => ({ name: f.name, kind: 'festival' as const, detail: `${f.days[0]} ${SEASON_LABELS[f.season]}`, to: `/calendrier?season=${f.season}&day=${f.days[0]}${f.year ? `&year=${f.year}` : ''}` })),
+    ...BUILDINGS.map((b) => ({ name: b.name, kind: 'construction' as const, detail: GROUP_LABELS[b.group], to: `/constructions?q=${enc(b.name)}` })),
+    ...QUESTS.map((q) => ({ name: q.name, kind: 'quete' as const, detail: KIND_TABS[q.kind], to: `/quetes?tab=${q.kind}&q=${enc(q.name)}` })),
+    ...PLACES.map((p) => ({ name: p.name, kind: 'lieu' as const, detail: p.area, to: `/lieux?q=${enc(p.name)}` })),
   ]
   return e.map((x, i) => ({ ...x, key: `${x.kind}-${i}`, norm: normalize(x.name) }))
 }

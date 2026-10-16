@@ -2,11 +2,14 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import { Bundles } from './pages/Bundles'
 import { Calendar } from './pages/Calendar'
+import { Constructions } from './pages/Constructions'
 import { Crafting } from './pages/Crafting'
 import { Equipment } from './pages/Equipment'
 import { Farming } from './pages/Farming'
 import { Fishing } from './pages/Fishing'
 import { Items } from './pages/Items'
+import { Places } from './pages/Places'
+import { Quests } from './pages/Quests'
 import { Today } from './pages/Today'
 import { Villagers } from './pages/Villagers'
 import { GameDateProvider } from './state/useGameDate'
@@ -26,6 +29,9 @@ export default function App() {
             <Route path="equipement" element={<Equipment />} />
             <Route path="villageois" element={<Villagers />} />
             <Route path="paquets" element={<Bundles />} />
+            <Route path="constructions" element={<Constructions />} />
+            <Route path="quetes" element={<Quests />} />
+            <Route path="lieux" element={<Places />} />
           </Route>
         </Routes>
       </BrowserRouter>

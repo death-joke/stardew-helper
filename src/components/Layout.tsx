@@ -16,6 +16,9 @@ const NAV: NavItem[] = [
   { to: '/equipement', label: 'Armes & armures', icon: '🗡️' },
   { to: '/villageois', label: 'Villageois', icon: '👥' },
   { to: '/paquets', label: 'Paquets', icon: '🧺' },
+  { to: '/constructions', label: 'Constructions', icon: '🏗️' },
+  { to: '/quetes', label: 'Quêtes', icon: '📜' },
+  { to: '/lieux', label: 'Lieux', icon: '🗺️' },
 ]
 
 const PRIMARY = NAV.filter((n) => n.primary)
