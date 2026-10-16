@@ -69,7 +69,7 @@ export function Layout() {
         </main>
         <footer className="mx-auto w-full max-w-6xl px-4 pb-6 pt-2 text-xs text-muted lg:px-6">
           <p>
-            Application non officielle. Stardew Valley est une création de ConcernedApe. Les données viennent du{' '}
+            Application non officielle. Stardew Valley est une création de ConcernedApe. Les données et les portraits viennent du{' '}
             <a className="underline" href="https://fr.stardewvalleywiki.com" target="_blank" rel="noreferrer">Stardew Valley Wiki</a>{' '}
             (version 1.6), sous licence{' '}
             <a className="underline" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.fr" target="_blank" rel="noreferrer">CC BY-NC-SA 3.0</a>

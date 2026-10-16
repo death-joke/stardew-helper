@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import type { Villager } from '../data/types'
 
 export function BirthdayRow({ villager, when }: { villager: Villager; when?: string }) {
@@ -5,7 +6,9 @@ export function BirthdayRow({ villager, when }: { villager: Villager; when?: str
   return (
     <li className="flex flex-col gap-0.5">
       <span className="font-medium">
-        🎂 {villager.name}{when && <span className="ml-2 text-sm font-normal text-muted">{when}</span>}
+        🎂{' '}
+        <Link to={`/villageois?q=${encodeURIComponent(villager.name)}`} className="text-wood underline">{villager.name}</Link>
+        {when && <span className="ml-2 text-sm font-normal text-muted">{when}</span>}
       </span>
       <span className="text-sm text-ink/80">
         Adore : {gifts.join(', ')}{villager.loves.length > gifts.length ? '…' : ''}

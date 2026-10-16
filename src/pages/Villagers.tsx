@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { Card } from '../components/Card'
 import { DetailPanel } from '../components/DetailPanel'
 import { ScheduleSection } from '../components/ScheduleSection'
+import { VillagerPortrait } from '../components/VillagerPortrait'
 import { UNIVERSAL_LIKES, VILLAGER_DETAILS } from '../data/villagerDetails'
 import { UNIVERSAL_LOVES, VILLAGERS } from '../data/villagers'
 import type { Villager, VillagerSchedule } from '../data/types'
@@ -69,12 +70,17 @@ export function Villagers() {
                   onClick={() => setSelectedId(v.id)}
                   className={`w-full rounded-lg border p-3 text-left shadow-sm hover:bg-parchment-dark/60 ${v.id === selectedId ? 'border-wood bg-parchment-dark' : 'border-wood/30 bg-card'}`}
                 >
-                  <span className="flex items-baseline justify-between gap-2">
-                    <span className="font-semibold">{v.name}</span>
-                    {v.marriageable && <span aria-label="Mariable" title="Mariable">💍</span>}
+                  <span className="flex items-center gap-3">
+                    <VillagerPortrait id={v.id} />
+                    <span className="min-w-0 flex-1">
+                      <span className="flex items-baseline justify-between gap-2">
+                        <span className="font-semibold">{v.name}</span>
+                        {v.marriageable && <span aria-label="Mariable" title="Mariable">💍</span>}
+                      </span>
+                      <span className="block text-sm text-muted">🎂 {v.birthday.day} {SEASON_LABELS[v.birthday.season]}</span>
+                      <span className={`block text-xs ${days <= 7 ? 'font-semibold text-fall-text' : 'text-muted'}`}>{describeDays(days)}</span>
+                    </span>
                   </span>
-                  <span className="block text-sm text-muted">🎂 {v.birthday.day} {SEASON_LABELS[v.birthday.season]}</span>
-                  <span className={`block text-xs ${days <= 7 ? 'font-semibold text-fall-text' : 'text-muted'}`}>{describeDays(days)}</span>
                 </button>
               </li>
             )
