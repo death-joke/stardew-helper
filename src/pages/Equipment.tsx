@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Card } from '../components/Card'
+import { IngredientChips } from '../components/IngredientChips'
 import { EQUIPMENT } from '../data/equipment'
-import { ITEMS } from '../data/items'
-import type { Equipment as EquipmentItem, EquipmentKind, Item } from '../data/types'
+import type { Equipment as EquipmentItem, EquipmentKind } from '../data/types'
 import {
   FOOTWEAR_SORTS, SORT_LABELS, WEAPON_KINDS, WEAPON_SORTS, filterEquipment, isWeapon, sortEquipment,
 } from '../lib/equipment'
 import type { EquipmentSort } from '../lib/equipment'
+import { catalog } from '../lib/items'
+import type { CatalogItem } from '../lib/items'
 import { normalize } from '../lib/text'
 
 type Tab = 'armes' | 'chaussures' | 'anneaux'
@@ -15,7 +17,7 @@ type Tab = 'armes' | 'chaussures' | 'anneaux'
 const field = 'field'
 const WEAPONS = EQUIPMENT.filter(isWeapon)
 const FOOTWEAR = EQUIPMENT.filter((e) => !isWeapon(e))
-const RINGS = ITEMS.filter((i) => i.category === 'Anneaux')
+const RINGS = catalog().filter((i) => i.category === 'Anneaux')
 const TABS: Array<[Tab, string, number]> = [
   ['armes', 'Armes', WEAPONS.length],
   ['chaussures', 'Chaussures', FOOTWEAR.length],
@@ -151,14 +153,16 @@ function EquipmentCard({ item }: { item: EquipmentItem }) {
   )
 }
 
-function RingCard({ ring }: { ring: Item }) {
+function RingCard({ ring }: { ring: CatalogItem }) {
   return (
     <li className="rounded-lg border border-wood/30 bg-card p-3 shadow-sm">
       <div className="flex items-baseline justify-between gap-2">
         <h3 className="font-semibold">{ring.name}</h3>
         {ring.price !== null && <span className="shrink-0 text-sm">{ring.price} po</span>}
       </div>
+      {ring.effect && <p className="mt-1 text-sm font-medium">Effet : {ring.effect}</p>}
       {ring.desc && <p className="text-sm text-muted">{ring.desc}</p>}
+      {ring.ingredients && <IngredientChips items={ring.ingredients} />}
       <WhereList where={ring.where} />
     </li>
   )

@@ -30,9 +30,11 @@ Deux formes de téléchargement, avec `curl` :
 | Objets (`items.ts`) | `fetch_cats.py`, `fetch_cats2.py` → `emit_items.py` → `emit_items_ts.py` |
 | Armes et chaussures (`equipment.ts`) | `emit_weapons.py` |
 | Paquets (`bundles.ts`) | `tables.py` → `emit_bundles.py` |
+| Quêtes (`quests.ts`) | `Quêtes` rendue via `action=parse` → `tables.py` → `emit_quests.py` |
 | Cadeaux et détails des villageois (`villagerDetails.ts`) | `parse_gifts.py` |
 | Emplois du temps (`schedules.ts`) | `parse_sched.py` → `emit_sched.py` |
 | Cultures (`crops.ts`) | saisies à la main, recoupées avec `parse_crops.py` |
+| Constructions et lieux (`buildings.ts`, `places.ts`) | saisis à la main d'après les pages Scierie, Tour du sorcier, Poissonnerie, Île Gingembre et les pages de chaque lieu |
 
 Les chemins (`/Users/…`, noms de fichiers bruts) sont ceux de la session de travail : à adapter pour les relancer.
 Après toute régénération, lancer `npm test` : les tests vérifient les effectifs (80 recettes, 31 paquets, 34 villageois…)
