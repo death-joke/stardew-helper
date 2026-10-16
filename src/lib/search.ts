@@ -8,12 +8,13 @@ import { EQUIPMENT } from '../data/equipment'
 import { ITEMS } from '../data/items'
 import { PLACES } from '../data/places'
 import { QUESTS } from '../data/quests'
+import { TOOLS } from '../data/tools'
 import { VILLAGERS } from '../data/villagers'
 import { SEASON_LABELS } from './gameDate'
 import { KIND_TABS } from './quests'
 import { normalize } from './text'
 
-export type SearchKind = 'objet' | 'equipement' | 'poisson' | 'culture' | 'artisanat' | 'cuisine' | 'villageois' | 'festival' | 'construction' | 'quete' | 'lieu'
+export type SearchKind = 'objet' | 'equipement' | 'poisson' | 'culture' | 'artisanat' | 'cuisine' | 'villageois' | 'festival' | 'construction' | 'quete' | 'lieu' | 'outil'
 
 export const KIND_LABELS: Record<SearchKind, string> = {
   objet: 'Objet',
@@ -27,6 +28,7 @@ export const KIND_LABELS: Record<SearchKind, string> = {
   construction: 'Construction',
   quete: 'Quête',
   lieu: 'Lieu',
+  outil: 'Outil',
 }
 
 export interface SearchEntry {
@@ -53,6 +55,7 @@ function build(): SearchEntry[] {
     ...BUILDINGS.map((b) => ({ name: b.name, kind: 'construction' as const, detail: GROUP_LABELS[b.group], to: `/constructions?q=${enc(b.name)}` })),
     ...QUESTS.map((q) => ({ name: q.name, kind: 'quete' as const, detail: KIND_TABS[q.kind], to: `/quetes?tab=${q.kind}&q=${enc(q.name)}` })),
     ...PLACES.map((p) => ({ name: p.name, kind: 'lieu' as const, detail: p.area, to: `/lieux?q=${enc(p.name)}` })),
+    ...TOOLS.flatMap((l) => l.levels.map((v) => ({ name: v.name, kind: 'outil' as const, detail: v.price !== null ? `${v.price} po` : l.name, to: `/outils?q=${enc(l.name)}` }))),
   ]
   return e.map((x, i) => ({ ...x, key: `${x.kind}-${i}`, norm: normalize(x.name) }))
 }

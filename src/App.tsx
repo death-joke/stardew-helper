@@ -11,6 +11,7 @@ import { Items } from './pages/Items'
 import { Places } from './pages/Places'
 import { Quests } from './pages/Quests'
 import { Today } from './pages/Today'
+import { Tools } from './pages/Tools'
 import { Villagers } from './pages/Villagers'
 import { GameDateProvider } from './state/useGameDate'
 
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="constructions" element={<Constructions />} />
             <Route path="quetes" element={<Quests />} />
             <Route path="lieux" element={<Places />} />
+            <Route path="outils" element={<Tools />} />
           </Route>
         </Routes>
       </BrowserRouter>
