@@ -87,3 +87,19 @@ describe('global search', () => {
     expect(search('grand-père')[0]).toMatchObject({ kind: 'festival', to: '/calendrier?season=printemps&day=1&year=3' })
   })
 })
+
+describe('anneaux : effets et ingrédients', () => {
+  const ring = (name: string) => catalog().find((i) => i.name === name)!
+
+  it('chaque anneau a un effet', () => {
+    const rings = catalog().filter((i) => i.category === 'Anneaux')
+    expect(rings).toHaveLength(29)
+    expect(rings.every((r) => r.effect)).toBe(true)
+  })
+
+  it('valeurs connues', () => {
+    expect(ring('Bague de rubis').effect).toBe('Augmente l’Attaque de 10%.')
+    expect(ring('Anneau de pierre luisante').ingredients).toEqual([{ name: 'Essence solaire', qty: 5 }, { name: 'Lingot de fer', qty: 5 }])
+    expect(ring('Bague vampirique').ingredients).toEqual([])
+  })
+})

@@ -1,8 +1,9 @@
 import { CROPS } from '../data/crops'
 import { FISH } from '../data/fish'
 import { ITEMS } from '../data/items'
+import { RINGS } from '../data/rings'
 import { COOKING_RECIPES, CRAFT_RECIPES } from '../data/recipes'
-import type { CookingRecipe, CraftRecipe, Item, Villager } from '../data/types'
+import type { CookingRecipe, CraftRecipe, Ingredient, Item, Villager } from '../data/types'
 import { VILLAGERS } from '../data/villagers'
 import { SEASON_LABELS } from './gameDate'
 import { formatSeasons, formatWindows } from './fishing'
@@ -11,6 +12,9 @@ import { normalize } from './text'
 /** Objet du catalogue ; `link` renvoie vers l'onglet dédié pour les cultures et les poissons. */
 export interface CatalogItem extends Item {
   link?: { to: string; label: string }
+  /** Effet et ingrédients de fabrication (anneaux). */
+  effect?: string
+  ingredients?: Ingredient[]
 }
 
 export const CULTURES = 'Cultures'
@@ -47,11 +51,18 @@ function fishItems(): CatalogItem[] {
   }))
 }
 
+const RING_BY_NAME = new Map(RINGS.map((r) => [normalize(r.name), r]))
+
+function withRingDetails(item: Item): CatalogItem {
+  const ring = item.category === 'Anneaux' ? RING_BY_NAME.get(normalize(item.name)) : undefined
+  return ring ? { ...item, effect: ring.effect, ingredients: ring.ingredients } : item
+}
+
 let cached: CatalogItem[] | null = null
 
 /** Tous les objets : données du wiki + cultures + poissons. Calculé une fois. */
 export function catalog(): CatalogItem[] {
-  cached ??= [...ITEMS, ...cropItems(), ...fishItems()]
+  cached ??= [...ITEMS.map(withRingDetails), ...cropItems(), ...fishItems()]
   return cached
 }
 

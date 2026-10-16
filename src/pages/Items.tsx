@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { Card } from '../components/Card'
+import { IngredientChips } from '../components/IngredientChips'
 import { catalog, categories, filterItems, lovedBy, recipesUsing } from '../lib/items'
 import type { CatalogItem } from '../lib/items'
 
@@ -59,6 +60,8 @@ function ItemCard({ item }: { item: CatalogItem }) {
       </div>
       <p className="text-xs text-muted">{item.category}{item.sub && ` · ${item.sub}`}</p>
       {item.desc && <p className="mt-1 text-sm text-ink/80">{item.desc}</p>}
+      {item.effect && <p className="mt-2 text-sm"><span className="font-semibold">Effet : </span>{item.effect}</p>}
+      {item.ingredients && <IngredientChips items={item.ingredients} />}
 
       <h4 className="mt-2 text-xs font-semibold uppercase text-muted">Où le trouver</h4>
       {item.where.length > 0 ? (
