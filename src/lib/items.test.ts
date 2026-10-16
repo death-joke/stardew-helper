@@ -4,8 +4,8 @@ import { CULTURES, POISSONS, catalog, categories, filterItems, lovedBy, recipesU
 import { search } from './search'
 
 describe('items data', () => {
-  it('380 objets du wiki, identifiants uniques, chacun avec un nom et une catégorie', () => {
-    expect(ITEMS).toHaveLength(380)
+  it('381 objets du wiki, identifiants uniques, chacun avec un nom et une catégorie', () => {
+    expect(ITEMS).toHaveLength(381)
     expect(new Set(ITEMS.map((i) => i.id)).size).toBe(ITEMS.length)
     expect(ITEMS.every((i) => i.name && i.category)).toBe(true)
   })

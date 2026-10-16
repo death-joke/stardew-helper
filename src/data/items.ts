@@ -384,4 +384,7 @@ export const ITEMS: Item[] = [
   { id: 'fruits-et-legumes-banane', name: 'Banane', category: 'Fruits et légumes', sub: null, desc: 'La Banane est un fruit produit chaque jour par un Bananier durant la saison de récolte.', price: 150, where: ['Bananier'], usedIn: [] },
   { id: 'fruits-et-legumes-mangue', name: 'Mangue', category: 'Fruits et légumes', sub: null, desc: 'La Mangue est un fruit produit chaque jour par un Manguier durant la saison de récolte.', price: 130, where: ['Manguier'], usedIn: [] },
   { id: 'fruits-et-legumes-feuilles-de-the', name: 'Feuilles de thé', category: 'Fruits et légumes', sub: null, desc: 'Les Feuilles de thé sont des récoltes de type légume qui poussent sur des Théiers.', price: 50, where: [], usedIn: [] },
+  // Ajouté à la main d'après la page « Récolteur automatique » du wiki FR (catégorie Outils, absente des extractions ci-dessus).
+  { id: 'objets-speciaux-recolteur-automatique', name: 'Récolteur automatique', category: 'Objets spéciaux', sub: null, desc: 'Récolte automatiquement le lait des vaches et des chèvres et la laine des moutons, ainsi que les produits des poules, quand il est placé dans une grange ou un poulailler. Il stocke 36 objets (clic droit pour les récupérer). Il empêche de gagner l’amitié liée à la traite et à la tonte manuelles.', price: null, priceNote: 'Ne se vend pas', where: ['Ranch de Marnie, 25 000 po (après le niveau 10 en Agriculture ; Marnie envoie une lettre le lendemain)', 'Coffres de la Caverne du Crâne (parfois)'], usedIn: [] },
 ]
+
