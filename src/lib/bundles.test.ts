@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { BUNDLE_ROOMS } from '../data/bundles'
-import { availableIn, seasonSummary, totalBundles } from './bundles'
+import { EMPTY_CHECKS, availableIn, isBundleChecks, missingByRoom, missingForBundle, seasonSummary, toggleDone, toggleGot, totalBundles } from './bundles'
 import { itemLink } from './links'
 
 const item = (name: string, qty = 1) => ({ name, qty, note: '' })
@@ -61,5 +61,38 @@ describe('item links', () => {
     expect(itemLink('Bois')).toBe('/objets?q=Bois')
     expect(itemLink('Calmars frits')).toBe('/craft?tab=cuisine&q=Calmars%20frits')
     expect(itemLink('Tous les poissons')).toBeNull()
+  })
+})
+
+describe('suivi de progression', () => {
+  const art = () => bundle('paquet-artisan')
+
+  it('tout manque au départ, et par salle', () => {
+    const all = missingByRoom(EMPTY_CHECKS)
+    expect(all).toHaveLength(7)
+    expect(missingByRoom(EMPTY_CHECKS, 'salle-d-artisanats').map((r) => r.room.id)).toEqual(['salle-d-artisanats'])
+  })
+
+  it('cocher un objet diminue ce qu’il reste et le retire de la liste', () => {
+    const b = art()
+    const name = b.items[0].name
+    const m = missingForBundle(b, toggleGot(EMPTY_CHECKS, b.id, name))!
+    expect(m.remaining).toBe(b.slots - 1)
+    expect(m.items.map((i) => i.name)).not.toContain(name)
+  })
+
+  it('un paquet coché ou dont toutes les cases sont remplies ne manque plus', () => {
+    const b = art()
+    expect(missingForBundle(b, toggleDone(EMPTY_CHECKS, b.id))).toBeNull()
+    const full = b.items.slice(0, b.slots).reduce((c, i) => toggleGot(c, b.id, i.name), EMPTY_CHECKS)
+    expect(missingForBundle(b, full)).toBeNull()
+  })
+
+  it('décocher annule, et la validation du stockage rejette les données invalides', () => {
+    const b = art()
+    expect(toggleDone(toggleDone(EMPTY_CHECKS, b.id), b.id).done).toEqual([])
+    expect(isBundleChecks(EMPTY_CHECKS)).toBe(true)
+    expect(isBundleChecks({ done: [1], got: {} })).toBe(false)
+    expect(isBundleChecks(null)).toBe(false)
   })
 })
