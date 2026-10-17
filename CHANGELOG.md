@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.2.0](https://github.com/death-joke/stardew-helper/compare/v1.1.0...v1.2.0) (2026-10-17)
+
+### Features
+
+* **bundles:** suivi de progression du Centre communautaire ([#6](https://github.com/death-joke/stardew-helper/issues/6)) ([4308ae1](https://github.com/death-joke/stardew-helper/commit/4308ae101abf1434ff7dbdc34d8e3fce24e0be49))
+
 ## [1.1.0](https://github.com/death-joke/stardew-helper/compare/v1.0.5...v1.1.0) (2026-10-16)
 
 ### Features
