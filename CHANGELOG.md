@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.3.0](https://github.com/death-joke/stardew-helper/compare/v1.2.0...v1.3.0) (2026-11-05)
+
+### Features
+
+* **farm:** plan de ferme avec zones d'effet ([#7](https://github.com/death-joke/stardew-helper/issues/7)) ([6623eb3](https://github.com/death-joke/stardew-helper/commit/6623eb32ba66fbd03b9a542a9454a88fd2c48ee6))
+
 ## [1.2.0](https://github.com/death-joke/stardew-helper/compare/v1.1.0...v1.2.0) (2026-10-17)
 
 ### Features
