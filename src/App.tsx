@@ -6,6 +6,7 @@ import { Constructions } from './pages/Constructions'
 import { Crafting } from './pages/Crafting'
 import { Equipment } from './pages/Equipment'
 import { Farming } from './pages/Farming'
+import { FarmPlanner } from './pages/FarmPlanner'
 import { Fishing } from './pages/Fishing'
 import { Items } from './pages/Items'
 import { Places } from './pages/Places'
@@ -24,6 +25,7 @@ export default function App() {
             <Route index element={<Today />} />
             <Route path="calendrier" element={<Calendar />} />
             <Route path="agriculture" element={<Farming />} />
+            <Route path="plan-de-ferme" element={<FarmPlanner />} />
             <Route path="peche" element={<Fishing />} />
             <Route path="craft" element={<Crafting />} />
             <Route path="objets" element={<Items />} />

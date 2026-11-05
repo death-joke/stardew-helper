@@ -20,6 +20,7 @@ const NAV: NavItem[] = [
   { to: '/quetes', label: 'Quêtes', icon: '📜' },
   { to: '/lieux', label: 'Lieux', icon: '🗺️' },
   { to: '/outils', label: 'Outils', icon: '⛏️' },
+  { to: '/plan-de-ferme', label: 'Plan de ferme', icon: '📐' },
 ]
 
 const PRIMARY = NAV.filter((n) => n.primary)
